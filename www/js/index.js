@@ -8,6 +8,15 @@ var app = {
     },
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
+        console.log(window.localStorage.getItem("expediente"));
+        if(window.localStorage.getItem("expediente") > 0)
+        {
+            $.post("http://dotredes.dyndns.biz:18888/dot_izzi/drwifi/load_inicio.php",{
+                expediente:window.localStorage.getItem("expediente")
+            },function(data){
+                $("#principal").html(data);
+            });
+        }
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -34,7 +43,12 @@ function validar()
 
                     window.localStorage.setItem("expediente",data);
                     navigator.geolocation.getCurrentPosition(getLocation,function(e){});
-                    console.log("OK");
+                    console.log("OK "+ window.localStorage.getItem("expediente"));
+                    $.post("http://dotredes.dyndns.biz:18888/dot_izzi/drwifi/load_inicio.php",{
+                    expediente:window.localStorage.getItem("expediente")
+                    },function(data){
+                    $("#principal").html(data);
+                    });
                 }
                 
             });
