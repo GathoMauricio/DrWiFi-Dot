@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+        <meta charset="UTF-8">
+     <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+    -->
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
         <link rel="stylesheet" type="text/css" href="css/index.css">
+        <link rel="stylesheet" type="text/css" href="css/sweetalert.css">
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="js/sweetalert.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <title>DrWiFiDotRedes</title>
         <style type="text/css">
@@ -31,14 +35,18 @@
                 color:white;
             }
         </style>
+        
     </head>
     <body>
+        
         <center>
             <img src="img/logo.png" style="width:50%;">
             <h3 style="color:#FF8000;">Asistencia izzi Dr. Wifi</h3>
-            <input type="number" class="txt_expediente"><br><br>
-            <button class="btn_confirmar">Confirmar</button><br><br><br>
-            <img src="img/logo_dot.png" width="40">
+            <input type="number" class="txt_expediente" id="txt_expediente"><br><br>
+            <button class="btn_confirmar" onclick="validar();">ACCEDER</button><br><br><br>
+            <img src="img/logo_dot.png" width="40" onclick="informacion();"><br>
+            <label style="color:#FFF;">click me</label>
         </center>
+
    </body>
 </html>
