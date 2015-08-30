@@ -1,3 +1,16 @@
+
+$(document).ready(function(){
+    console.log(window.localStorage.getItem("expediente"));
+        if(window.localStorage.getItem("expediente") > 0)
+        {
+            $.post("http://dotredes.dyndns.biz:18888/dot_izzi/drwifi/load_inicio.php",{
+                expediente:window.localStorage.getItem("expediente")
+            },function(data){
+                $("#principal").html(data);
+
+            });
+        }
+});
 var app = {
     // Application Constructor
     initialize: function() {
@@ -15,6 +28,7 @@ var app = {
                 expediente:window.localStorage.getItem("expediente")
             },function(data){
                 $("#principal").html(data);
+                initialize();
             });
         }
     },
@@ -26,8 +40,8 @@ var app = {
 app.initialize();
 function validar()
 {
-    //if(hayConexion())
-    //{
+    if(hayConexion())
+    {
 
         var expediente=$("#txt_expediente").prop("value");
         var fecha=$("#txt_fecha").prop("value");
@@ -55,7 +69,7 @@ function validar()
         }else{
             swal("Campo vacio!!!","Ingrese fecha y número de expediente válido.","warning");
         }
-    //}
+    }
 }
 function informacion()
 {
@@ -89,4 +103,9 @@ lon:location.coords.longitude
 },function(data){
 
 });
+}
+function cerrarSesion()
+{
+    window.localStorage.clear();
+    window.location="index.html";
 }
