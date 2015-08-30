@@ -91,3 +91,26 @@ function cerrarSesion()
     window.localStorage.clear();
     window.location="index.html";
 }
+function comentar()
+{
+    swal({
+    title: "Comentar!",
+    text: "Escribe algo a cerca de este servicio:",
+    type: "input",
+    showCancelButton: true,
+    closeOnConfirm: false,
+    animation: "slide-from-top",
+    inputPlaceholder: "Ingresa el texto" },
+    function(inputValue){
+    if (inputValue === false) return false;
+    if (inputValue === "") {
+    swal.showInputError("El campo no debe estár vacio!");
+    return false   }
+    $.post("http://dotredes.dyndns.biz:18888/dot_izzi/drwifi/insert_comentario.php",{
+        id_expediente:window.localStorage.getItem("expediente"),
+        comentario:inputValue
+    },function(data){
+        alert(data);
+        swal("OK!", "Tu comentario se ha insertado con éxito", "success"); });
+       });
+}
