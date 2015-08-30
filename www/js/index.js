@@ -110,7 +110,7 @@ function comentar()
         id_expediente:window.localStorage.getItem("expediente"),
         comentario:inputValue
     },function(data){
-        alert(data);
+     
         swal("OK!", "Tu comentario se ha insertado con éxito", "success"); });
        });
 }
