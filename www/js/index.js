@@ -40,8 +40,8 @@ var app = {
 app.initialize();
 function validar()
 {
-    if(hayConexion())
-    {
+    //if(hayConexion())
+    //{
 
         var expediente=$("#txt_expediente").prop("value");
         var fecha=$("#txt_fecha").prop("value");
@@ -69,31 +69,13 @@ function validar()
         }else{
             swal("Campo vacio!!!","Ingrese fecha y número de expediente válido.","warning");
         }
-    }
+    //}
 }
 function informacion()
 {
     swal("Dot Redes","Información de dot redes","success");
 }
-function hayConexion() {
-    var networkState = navigator.connection.type;
-        var states = {};
-        states[Connection.UNKNOWN]  = 'Unknown connection';
-        states[Connection.ETHERNET] = 'Ethernet connection';
-        states[Connection.WIFI]     = 'WiFi connection';
-        states[Connection.CELL_2G]  = 'Cell 2G connection';
-        states[Connection.CELL_3G]  = 'Cell 3G connection';
-        states[Connection.CELL_4G]  = 'Cell 4G connection';
-        states[Connection.CELL]     = 'Cell generic connection';
-        states[Connection.NONE]     = 'No network connection';
-    if(states[networkState]=='No network connection')
-    {
-        return false;
-    }else
-    {
-        return true;
-    }
-}
+
 function getLocation(location){
 $.post("http://dotredes.dyndns.biz:18888/dot_izzi/drwifi/update_location_expediente.php",
 {
