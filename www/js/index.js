@@ -17,19 +17,62 @@ var app = {
 app.initialize();
 function validar()
 {
-    var expediente=$("#txt_expediente").prop("value");
-    if(expediente.length>0)
-    {
-        $.post("",{
+    //if(hayConexion())
+    //{
 
-        },function(data){
+        var expediente=$("#txt_expediente").prop("value");
+        var fecha=$("#txt_fecha").prop("value");
+        if(expediente.length>0 && fecha.length>0)
+        {
+            $.post("http://dotredes.dyndns.biz:18888/dot_izzi/drwifi/validar_expediente.php",{
+                expediente:expediente,fecha:fecha
+            },function(data){
+                if(data==0)
+                {
+                    swal("Expediente inválido","El expediente no existe o aún no se procesa por favor intente más tarde","warning");
+                }else{
 
-        });
-    }else{
-        swal("Campo vacio!!!","Ingrese un número de expediente válido.","warning");
-    }
+                    window.localStorage.setItem("expediente",data);
+                    navigator.geolocation.getCurrentPosition(getLocation,function(e){});
+                    console.log("OK");
+                }
+                
+            });
+        }else{
+            swal("Campo vacio!!!","Ingrese fecha y número de expediente válido.","warning");
+        }
+    //}
 }
 function informacion()
 {
     swal("Dot Redes","Información de dot redes","success");
+}
+function hayConexion() {
+    var networkState = navigator.connection.type;
+        var states = {};
+        states[Connection.UNKNOWN]  = 'Unknown connection';
+        states[Connection.ETHERNET] = 'Ethernet connection';
+        states[Connection.WIFI]     = 'WiFi connection';
+        states[Connection.CELL_2G]  = 'Cell 2G connection';
+        states[Connection.CELL_3G]  = 'Cell 3G connection';
+        states[Connection.CELL_4G]  = 'Cell 4G connection';
+        states[Connection.CELL]     = 'Cell generic connection';
+        states[Connection.NONE]     = 'No network connection';
+    if(states[networkState]=='No network connection')
+    {
+        return false;
+    }else
+    {
+        return true;
+    }
+}
+function getLocation(location){
+$.post("http://dotredes.dyndns.biz:18888/dot_izzi/drwifi/update_location_expediente.php",
+{
+expediente:window.localStorage.getItem("expediente"),
+lat:location.coords.latitude,
+lon:location.coords.longitude
+},function(data){
+
+});
 }
